@@ -1,4 +1,5 @@
 #!/bin/bash
+# Basic cryoSPARC Installer
 # 2021 - johnbot
 
 USERPASSWORD=$(pwgen -B -c -N 1 -1 12)
