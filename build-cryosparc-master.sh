@@ -51,6 +51,9 @@ cd cryosparc_master
 
 ./install.sh --yes --license $LICENSE_ID --hostname $masterhostname \
 --dbpath /central/groups/$GROUPDIR/$USER/cryosparc_database --port $PORT
+
+# Set Bash Path
+# export PATH="/central/groups/Bjorklab/egavor/software/cryosparc/cryosparc_master/bin/:$PATH"
 }
 
 
