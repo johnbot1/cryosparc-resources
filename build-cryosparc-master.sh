@@ -54,6 +54,11 @@ cd cryosparc_master
 
 # Set Bash Path
 # export PATH="/central/groups/Bjorklab/egavor/software/cryosparc/cryosparc_master/bin/:$PATH"
+
+# Create User
+# cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
+
+# Write out cred file
 }
 
 
