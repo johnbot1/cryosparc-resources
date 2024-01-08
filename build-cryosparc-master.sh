@@ -13,6 +13,7 @@ echo "Checking Group storage quota before proceeding"
 
 install_cryosparc_master() {
 echo "beginning install of master"
+
 #sleep 120
 # Check if running from vislogin2. (cryoSPARC hardcodes its master hostname)
 
@@ -35,8 +36,8 @@ cd /central/groups/$GROUPDIR/$USER/software/cryosparc
 
 # Backup previous installation
 
-mv cryosparc2_master.tar.gz cryosparc2_master.tar.gz.bak
-mv cryosparc2_master cryosparc2_master.bak 
+#mv cryosparc2_master.tar.gz cryosparc2_master.tar.gz.bak
+#mv cryosparc2_master cryosparc2_master.bak 
 
 # Download and install
 echo " "
@@ -44,9 +45,9 @@ echo "License ID is $LICENSE_ID"
 echo " "
 pwd
 
-curl -L https://get.cryosparc.com/download/master-latest/$LICENSE_ID > cryosparc2_master.tar.gz
-tar -xf cryosparc2_master.tar.gz
-cd cryosparc2_master
+curl -L https://get.cryosparc.com/download/master-latest/$LICENSE_ID > cryosparc_master.tar.gz
+tar -xf cryosparc_master.tar.gz
+cd cryosparc_master
 
 ./install.sh --yes --license $LICENSE_ID --hostname $masterhostname \
 --dbpath /central/groups/$GROUPDIR/$USER/cryosparc_database --port $PORT
