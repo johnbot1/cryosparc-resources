@@ -1,0 +1,7 @@
+#New User
+
+cryosparcm createuser --email user@caltech.edu --password xxxxx --username "username" --firstname "first" --lastname "last"
+
+#RESET password
+
+cryosparcm resetpassword --email user@caltech.edu --password
