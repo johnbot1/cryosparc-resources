@@ -1,10 +1,10 @@
 {
-"name" : "centralhpc-cluster",
-"worker_bin_path" : "/central/groups/reeslab/xfeng2/software/cryosparc/cryosparc_worker/bin/cryosparcw",
-"cache_path" : "/central/scratchio/xfeng2",
-"send_cmd_tpl" : "{{ command }}",
-"qsub_cmd_tpl" : "sbatch {{ script_path_abs }}",
-"qstat_cmd_tpl" : "squeue -j {{ cluster_job_id }}",
-"qdel_cmd_tpl" : "scancel {{ cluster_job_id }}",
-"qinfo_cmd_tpl" : "sinfo"
+    "name" : "centralhpc-cluster",
+    "worker_bin_path" : "/central/groups/imss_admin/jflilley/software/cryosparc/cryosparc_worker/bin/cryosparcw",
+    "cache_path" : "/central/scratchio/jflilley",
+    "send_cmd_tpl" : "ssh loginnode {{ command }}",
+    "qsub_cmd_tpl" : "sbatch {{ script_path_abs }}",
+    "qstat_cmd_tpl" : "squeue -j {{ cluster_job_id }}",
+    "qdel_cmd_tpl" : "scancel {{ cluster_job_id }}",
+    "qinfo_cmd_tpl" : "sinfo"
 }
