@@ -26,7 +26,7 @@
 #SBATCH -N 1
 #SBATCH -n {{ num_cpu }}
 ## Not sure if the following are needed any longer. testing required. johnbot
-## SBATCH --time=120:00:00
+#SBATCH --time=24:00:00
 ## SBATCH --exclusive
 #SBATCH --gres=gpu:{{ num_gpu }}
 ## We don't use partitions
