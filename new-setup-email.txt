@@ -1,12 +1,16 @@
-Hi (User), Cryosparc is now running under your account on the Resnick HPC. 
+Hello (User), Cryosparc is now running under your account on the Resnick HPC. 
 
 To Access:
 
 1. Connect to VPN if off campus
 2. Navigate https://interactive.caltech.edu/ into your local web browser. (This is our Open Ondemand web based cluster portal)
-3. Once logged in, select the 'Web browser - compute' application, then connect. 
-4. Within the Web Browser compute application enter http://vislogin2:PORT to connect to your personal Cryosparc master process. 
-5. Use the credentials in your home directory ~/.cryosparc-creds 
+3. Once logged in, select the 'Web browser - compute' application, then connect to it. 
+4. Within the remote/OOD Web Browser compute application, enter http://vislogin1:PORT to connect to your personal Cryosparc master process. (Once again, this address should be entered within the remote browser address bar, not your local browser). Your PORT is noted in your .cryosparc-creds file.
+5. Use the credentials in your home directory ~/.cryosparc-creds. These credentials may be accessed either through direct ssh to the cluster or via the Open Ondemand shell app (terminal) in the OOD toolbar. 
+6. Do not attempt to upgrade the version of cryosparc using the built-in upgrade method. This will break your installation. In order to upgrade, you will need to fully re-install cryosparc. 
+7. While this installation may of been performed by IMSS admins, this is a self-managed application. We strongly advise users to become with cryoSPARC management commands and features. 
 
-John
+CryoSPARC reference: https://cryosparc.com/docs
+CryoSPARC discussion forum: https://discuss.cryosparc.com/
+
 
