@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masterhostname=vislogin2.cm.cluster
+masterhostname=vislogin1.cm.cluster
 
 
 usage() { echo "Usage: $0 [-g <groupdir>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
