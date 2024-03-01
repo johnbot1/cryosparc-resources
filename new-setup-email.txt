@@ -9,7 +9,7 @@ To Access:
 5. Use the credentials in your home directory ~/.cryosparc-creds. These credentials may be accessed either through direct ssh to the cluster or via the Open Ondemand shell app (terminal) in the OOD toolbar. 
 6. A cryosparc_projects directory was created under your group directory /central/groups/<group-name>/<username>/cryosparc_projects. We recommend saving projects to this directory as home directories are very limited quota-wise. 
 7. Do not attempt to upgrade the version of cryosparc using the built-in upgrade method. This will break your installation. In order to upgrade, you will need to fully re-install cryosparc. 
-8. While this installation may of been performed by IMSS admins, this is a self-managed application. We strongly advise users to become with cryoSPARC management commands and features. 
+8. While this installation may of been performed by IMSS admins, this is a self-managed application. We strongly advise users to become familiar with cryoSPARC management commands and features. 
 
 CryoSPARC reference: https://cryosparc.com/docs
 CryoSPARC discussion forum: https://discuss.cryosparc.com/

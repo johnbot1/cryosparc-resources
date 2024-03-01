@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # To run
-# srun -t 00:30:00  --gres=gpu:1 -N 1 ./cryosparc-configs-v2.12/build-cryosparc-worker.sh
-# srun --pty -t 00:30:00 --gres=gpu:1 -N 1 -n 2 /bin/bash -l
+# srun -t 00:30:00  --partition gpu --gres=gpu:1 -N 1 ./cryosparc-configs-v2.12/build-cryosparc-worker.sh
+# srun --pty -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 /bin/bash -l
 
 # Note: the license ID does not need to be set as slurm will 
 # automatically carry it over from the login host that runs

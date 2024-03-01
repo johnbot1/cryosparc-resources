@@ -3,12 +3,24 @@
 masterhostname=vislogin1.cm.cluster
 
 
-usage() { echo "Usage: $0 [-g <groupdir>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-g <groupdir>] [-e <email>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
 
 get_group_storage_quota() {
 echo "Checking Group storage quota before proceeding"
 /usr/lpp/mmfs/bin/mmlsquota -j $GROUPDIR  --block-size auto central
 #sleep 120
+}
+
+generate_user_password() {
+pwgen -A -n -y 12
+}
+
+obtain_first_last_name() {
+ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
+first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
+last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
+echo "First Name: $first_name"
+echo "Last Name: $last_name"
 }
 
 install_cryosparc_master() {
@@ -53,10 +65,26 @@ cd cryosparc_master
 --dbpath /central/groups/$GROUPDIR/$USER/cryosparc_database --port $PORT
 
 # Set Bash Path
-# export PATH="/central/groups/Bjorklab/egavor/software/cryosparc/cryosparc_master/bin/:$PATH"
+
+export PATH='/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH'
+
+# Startup cryoSPARC for first time
+
+cd /central/groups/$GROUPDIR/$USER/software/cryosparc
+/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/cryosparcm
+sleep 10
 
 # Create User
-# cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
+
+ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
+first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
+last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
+echo "First Name: $first_name"
+echo "Last Name: $last_name"
+
+generated_password=$(pwgen -A -n -y 12)
+#cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
+cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname '$first_name' --lastname '$last_name'
 
 # Write out cred file
 }
@@ -66,6 +94,9 @@ while getopts "g:l:p:" opt; do
     case "${opt}" in
         g)
             GROUPDIR=${OPTARG}
+            ;;
+        e)
+            EMAIL=${OPTARG}
             ;;
         l)
             LICENSE_ID=${OPTARG}
@@ -80,7 +111,8 @@ while getopts "g:l:p:" opt; do
 done
 shift $((OPTIND-1))
 
-if [[ -z $GROUPDIR || -z $LICENSE_ID || -z $PORT ]]; then
+#if [[ -z $GROUPDIR || -z $LICENSE_ID || -z $PORT ]]; then
+if [[ -z $GROUPDIR || -e $EMAIL || -z $LICENSE_ID || -z $PORT ]]; then
   echo 'One or more variables are undefined'        
   exit 1
 else
