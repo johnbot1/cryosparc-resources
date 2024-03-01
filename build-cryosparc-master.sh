@@ -87,7 +87,11 @@ generated_password=$(pwgen -A -n -y 12)
 cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname '$first_name' --lastname '$last_name'
 
 # Write out cred file
-#}
+#
+#
+#
+
+}
 
 
 while getopts "g:e:l:p:" opt; do
