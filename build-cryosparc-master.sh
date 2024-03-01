@@ -5,23 +5,23 @@ masterhostname=vislogin1.cm.cluster
 
 usage() { echo "Usage: $0 [-g <groupdir>] [-e <email>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
 
-get_group_storage_quota() {
-echo "Checking Group storage quota before proceeding"
-/usr/lpp/mmfs/bin/mmlsquota -j $GROUPDIR  --block-size auto central
-#sleep 120
-}
+#get_group_storage_quota() {
+#echo "Checking Group storage quota before proceeding"
+#/usr/lpp/mmfs/bin/mmlsquota -j $GROUPDIR  --block-size auto central
+##sleep 120
+#}
 
-generate_user_password() {
-pwgen -A -n -y 12
-}
+#generate_user_password() {
+#pwgen -A -n -y 12
+#}
 
-obtain_first_last_name() {
-ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
-first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
-last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
-echo "First Name: $first_name"
-echo "Last Name: $last_name"
-}
+#obtain_first_last_name() {
+#ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
+#first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
+#last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
+#echo "First Name: $first_name"
+#echo "Last Name: $last_name"
+#}
 
 install_cryosparc_master() {
 echo "beginning install of master"
@@ -66,13 +66,13 @@ cd cryosparc_master
 
 # Set Bash Path
 
-export PATH='/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH'
+export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH
 
 # Startup cryoSPARC for first time
 
 cd /central/groups/$GROUPDIR/$USER/software/cryosparc
-/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/cryosparcm
-sleep 10
+/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/cryosparcm start
+sleep 5
 
 # Create User
 
