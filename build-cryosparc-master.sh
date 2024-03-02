@@ -81,7 +81,7 @@ first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
 last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
 echo "First Name: $first_name"
 echo "Last Name: $last_name"
-
+echo " "
 generated_password=$(pwgen -A -n -y 12)
 #cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
 cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname '$first_name' --lastname '$last_name'
