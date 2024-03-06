@@ -84,7 +84,10 @@ echo "Last Name: $last_name"
 echo " "
 generated_password=$(pwgen -A -n -y 12)
 #cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
-cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname '$first_name' --lastname '$last_name'
+
+echo cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
+echo " "
+cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 
 # Write out cred file
 #
