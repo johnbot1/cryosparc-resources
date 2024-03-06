@@ -1,7 +1,7 @@
 {
     "name" : "centralhpc-cluster",
-    "worker_bin_path" : "/central/groups/imss_admin/jflilley/software/cryosparc/cryosparc_worker/bin/cryosparcw",
-    "cache_path" : "/central/scratchio/jflilley",
+#    "worker_bin_path" : "/central/groups/GROUPDIR/USER/software/cryosparc/cryosparc_worker/bin/cryosparcw",
+#    "cache_path" : "/central/scratchio/USER",
     "send_cmd_tpl" : "{{ command }}",
     "qsub_cmd_tpl" : "sbatch {{ script_path_abs }}",
     "qstat_cmd_tpl" : "squeue -j {{ cluster_job_id }}",
