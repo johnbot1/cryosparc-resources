@@ -13,7 +13,7 @@
 usage() { echo "Usage: $0 [-g <groupdir>] [-l <license id>]" 1>&2; exit 1; }
 
 install_cryosparc_worker() {
-srun --export=ALL -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 cd /central/groups/$GROUPDIR/$USER/software/cryosparc && curl -L https://get.cryosparc.com/download/worker-latest/$LICENSE_ID > cryosparc_worker.tar.gz && tar -xf cryosparc_worker.tar.gz; cd cryosparc_worker && ./install.sh --license $LICENSE_ID
+srun --export=ALL -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 cd /central/groups/$GROUPDIR/$USER/software/cryosparc && echo $PWD && curl -L https://get.cryosparc.com/download/worker-latest/$LICENSE_ID > cryosparc_worker.tar.gz && tar -xf cryosparc_worker.tar.gz; cd cryosparc_worker && ./install.sh --license $LICENSE_ID
 #srun --export=ALL -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 ls -l /central/groups/$GROUPDIR/$USER/software/cryosparc && date
 #srun --export=ALL -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 1 echo "$LICENSE_ID"
 }
