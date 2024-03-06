@@ -1,0 +1,17 @@
+#!/bin/bash
+##Submit this script with: sbatch thefilename
+
+
+
+#SBATCH --time=00:15:00   # walltime
+#SBATCH --ntasks=1   # number of processor cores (i.e. tasks)
+#SBATCH --nodes=1   # number of nodes
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+#SBATCH -J "build-cryosparc-worker"   # job name
+
+echo "Building cryoSPARC Worker process"
+
+#
+# srun -t 00:30:00  --partition gpu --gres=gpu:1 -N 1 ./cryosparc-configs-v2.12/build-cryosparc-worker.sh
+# srun --pty -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 /bin/bash -l
