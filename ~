@@ -133,6 +133,7 @@ if [[ -z $GROUPDIR || -e $EMAIL || -z $LICENSE_ID || -z $PORT ]]; then
   echo 'One or more variables are undefined'        
   exit 1
 else
+    #get_group_storage_quota
     install_cryosparc_master
     exit
 fi
