@@ -51,11 +51,6 @@ mkdir -p /central/scratchio/$USER
 
 cd /central/groups/$GROUPDIR/$USER/software/cryosparc
 
-# Backup previous installation
-
-#mv cryosparc2_master.tar.gz cryosparc2_master.tar.gz.bak
-#mv cryosparc2_master cryosparc2_master.bak 
-
 # Download and install
 echo " "
 echo "License ID is $LICENSE_ID"
@@ -70,7 +65,10 @@ cd cryosparc_master
 --dbpath /central/groups/$GROUPDIR/$USER/cryosparc_database --port $PORT
 
 # Set Bash Path
-# export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH
+
+echo "export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:\$PATH" >> ~/.bashrc
+echo "Adding /central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin to PATH in bashrc"
+echo " "
 
 # Startup cryoSPARC for first time
 cd /central/groups/$GROUPDIR/$USER/software/cryosparc
@@ -93,7 +91,7 @@ echo " "
 
 echo cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 echo " "
-/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
+/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 
 # Write out cred file
 #
