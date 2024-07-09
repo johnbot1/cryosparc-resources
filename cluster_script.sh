@@ -35,7 +35,7 @@
 #SBATCH --time=24:00:00
 ## SBATCH --exclusive
 #SBATCH --gres=gpu:{{ num_gpu }}
-## Enable the gpu partition line below to use our more modern RHEL9 OS machines.
+## The GPU specification above will be ignored unless also uncommenting the GPU partition below. 
 ## SBATCH --partition=gpu
 ## Cryosparc determines how much memory to use automatically based on what type
 ## of jobs are running. The line below overides the default as we were seeing

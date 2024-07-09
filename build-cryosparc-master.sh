@@ -91,9 +91,6 @@ echo "Email: $EMAIL"
 echo "Password is $generated_password"
 echo " "
 
-#cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
-
-
 echo cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 echo " "
 /central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
@@ -102,11 +99,22 @@ echo " "
 #
 #
 rm -rf ~/.cryosparc-creds
-echo 
+cat <<EOF > ~/.cryosparc-creds
+Username: $EMAIL
+Password: $generated_password
+Login URL: https://$masterhostname:$PORT
+Note: You need to login to the above URL
+from the Interactive webbrowser app NOT
+your local web browser
+interactive.hpc.caltech.edu
+EOF
+
+chmod 600 ~/.cryosparc-creds
 #
 
 
-# Copy the default cluster templates
+# Copy the default cluster templates and modify
+# to each user
 echo " "
 echo "Copying cryosparc templates"
 echo "Current working directory is $PWD"
