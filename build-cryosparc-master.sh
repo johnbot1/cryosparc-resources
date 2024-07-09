@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masterhostname=vislogin1.cm.cluster
+masterhostname=vislogin2.cm.cluster
 
 
 usage() { echo "Usage: $0 [-g <groupdir>] [-e <email>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
@@ -66,7 +66,7 @@ cd cryosparc_master
 
 # Set Bash Path
 
-export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH
+# export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH
 
 # Startup cryoSPARC for first time
 
@@ -76,7 +76,8 @@ sleep 5
 
 # Create User
 
-ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
+#ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
+ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=$USER)")
 first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
 last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
 echo "First Name: $first_name"
@@ -84,6 +85,9 @@ echo "Last Name: $last_name"
 echo "Email: $EMAIL"
 echo " "
 generated_password=$(pwgen -A -n -y 12)
+echo "Password is $generated_password"
+echo " "
+
 #cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
 
 echo cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
