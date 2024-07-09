@@ -2,6 +2,11 @@
 
 masterhostname=vislogin2.cm.cluster
 
+#Get current installer directory for template copy before
+#moving into cryo directory. This should eventually pull 
+#straight from github if public
+installer_directory=$PWD
+
 
 usage() { echo "Usage: $0 [-g <groupdir>] [-e <email>] [-l <license id>] -p <master port>]" 1>&2; exit 1; }
 
@@ -65,44 +70,53 @@ cd cryosparc_master
 --dbpath /central/groups/$GROUPDIR/$USER/cryosparc_database --port $PORT
 
 # Set Bash Path
-
 # export PATH=/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/:$PATH
 
 # Startup cryoSPARC for first time
-
 cd /central/groups/$GROUPDIR/$USER/software/cryosparc
 /central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/bin/cryosparcm start
-sleep 5
 
 # Create User
-
 #ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=jflilley)")
 ldap_output=$(ldapsearch -LLL -ZZ -x -b "ou=imss,o=caltech,c=us" "(uid=$USER)")
 first_name=$(echo "$ldap_output" | grep "givenName:" | awk '{print $2}')
 last_name=$(echo "$ldap_output" | grep "sn:" | awk '{print $2}')
+generated_password=$(pwgen -A -n -y 12)
+
 echo "First Name: $first_name"
 echo "Last Name: $last_name"
+echo "User: $USER"
+echo "Groupdir: $GROUPDIR"
 echo "Email: $EMAIL"
-echo " "
-generated_password=$(pwgen -A -n -y 12)
 echo "Password is $generated_password"
 echo " "
 
 #cryosparcm createuser --email egavor@caltech.edu --password oo777eshoAb! --username "egavor" --firstname "Edem" --lastname "Gavor"
 
+
 echo cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 echo " "
-cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
+/central/groups/$GROUPDIR/$USER/software/cryosparc/cryosparc_master/cryosparcm createuser --email $EMAIL --password $generated_password --username $USER --firstname $first_name --lastname $last_name
 
 # Write out cred file
 #
 #
+rm -rf ~/.cryosparc-creds
+echo 
 #
 
-# Copy the default cluster templates
-cp ./cluser_info.json /central/groups/$GROUPDIR/$USER/software/cryosparc
-cp ./cluster_script.sh /central/groups/$GROUPDIR/$USER/software/cryosparc
 
+# Copy the default cluster templates
+echo " "
+echo "Copying cryosparc templates"
+echo "Current working directory is $PWD"
+echo " " 
+echo "cp $installer_directory/cluster_info.json /central/groups/$GROUPDIR/$USER/software/cryosparc"
+cp $installer_directory/cluster_info.json /central/groups/$GROUPDIR/$USER/software/cryosparc
+echo "cp $installer_directory/cluster_script.sh /central/groups/$GROUPDIR/$USER/software/cryosparc"
+cp $installer_directory/cluster_script.sh /central/groups/$GROUPDIR/$USER/software/cryosparc
+echo " "
+#
 sed -i '/"worker_bin_path"/d' /central/groups/$GROUPDIR/$USER/software/cryosparc/cluster_info.json
 sed -i '/"cache_path"/d' /central/groups/$GROUPDIR/$USER/software/cryosparc/cluster_info.json
 
