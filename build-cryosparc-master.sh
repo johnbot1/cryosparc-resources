@@ -1,4 +1,5 @@
 #!/bin/bash
+# Pull this cryosparc-resources git into the users ~/ and use for both master and worker installs
 
 masterhostname=vislogin2.cm.cluster
 

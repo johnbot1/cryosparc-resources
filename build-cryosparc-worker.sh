@@ -1,4 +1,5 @@
 #!/bin/bash
+# Pull this cryosparc-resources git into the users ~/ and use for both master and worker installs
 
 echo "Be sure to cd into /central/groups/$GROUPDIR/$USER/software/cryosparc on vislogin2 and run cryosparm cluster connect before using"
 
