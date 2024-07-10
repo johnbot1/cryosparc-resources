@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Be sure to cd into /central/groups/$GROUPDIR/$USER/software/cryosparc on vislogin2 and run cryosparm cluster connect before using"
+
 # To run
 # srun -t 00:30:00  --partition gpu --gres=gpu:1 -N 1 ./cryosparc-configs-v2.12/build-cryosparc-worker.sh
 # srun --pty -t 00:30:00 --partition gpu --gres=gpu:1 -N 1 -n 2 /bin/bash -l
